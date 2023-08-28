@@ -1,0 +1,22 @@
+# 导入SageMath模块
+from sage.schemes.elliptic_curves.weil_pairing import weil_pairing
+from sage.misc.sage_timeit import timeit
+
+# 定义一个有限域
+p = 71 # 选择一个大质数
+F = GF(p) # 构造有限域
+
+# 定义一个椭圆曲线
+E = EllipticCurve(F, [0, 1]) # 构造椭圆曲线 y^2 = x^3 + 1
+
+# 定义两个椭圆曲线上的点
+P = E.random_point()
+Q = E.random_point()
+
+
+# 计算Weil配对
+n = p + 1 # 选择一个阶数
+t = timeit("E.weil_pairing(P, Q, n)") # 测量Weil配对的运行时间
+e = E.weil_pairing(P, Q, n) # 计算Weil配对 e(P, Q)
+print("Weil pairing:", e)
+print("Weil pairing time:", t)
